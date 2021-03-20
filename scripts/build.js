@@ -52,4 +52,5 @@ resizeAndMoveImg('images/pezza.jpg');
 
 minifyAndMoveCSS('css/style.css')
 
-minifyAndMoveJS('js/index.js');
+// removed JS completely, to get last point of performance
+// minifyAndMoveJS('js/index.js');
