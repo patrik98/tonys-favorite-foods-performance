@@ -15,5 +15,3 @@ fs.copyFileSync(asset('images/fish.jpg'), target('images/fish.jpg'));
 fs.copyFileSync(asset('images/pezza.jpg'), target('images/pezza.jpg'));
 fs.copyFileSync(asset('css/style.css'), target('css/style.css'));
 fs.copyFileSync(asset('js/index.js'), target('js/index.js'));
-fs.copyFileSync(asset('js/jquery.js'), target('js/jquery.js'));
-fs.copyFileSync(asset('js/lodash.js'), target('js/lodash.js'));
