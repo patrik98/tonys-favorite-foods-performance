@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
 const csso = require('csso');
+const terser = require('terser');
 
 function asset(filename) {
     return path.join(__dirname + '/../assets', filename);
@@ -33,6 +34,17 @@ function minifyAndMoveCSS(css) {
     }
 }
 
+function minifyAndMoveJS(js) {
+    const jsFile = fs.readFileSync(asset(js), 'utf8');
+    terser.minify(jsFile)
+    .then(minifiedJS => {
+        fs.writeFileSync(target(js), Buffer.from(minifiedJS.code, 'utf-8'));
+    })
+    .catch(error => {
+        console.log(error);
+    });
+}
+
 resizeAndMoveImg('images/soop.jpg');
 resizeAndMoveImg('images/brrto.jpg');
 resizeAndMoveImg('images/fish.jpg');
@@ -40,4 +52,4 @@ resizeAndMoveImg('images/pezza.jpg');
 
 minifyAndMoveCSS('css/style.css')
 
-fs.copyFileSync(asset('js/index.js'), target('js/index.js'));
+minifyAndMoveJS('js/index.js');
