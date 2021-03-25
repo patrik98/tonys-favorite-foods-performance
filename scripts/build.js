@@ -24,11 +24,9 @@ function resizeAndMoveImg(img) {
 
 function minifyAndMoveCSS(css) {
     try {
-        const cssFile = fs.readFileSync(asset('css/style.css'), 'utf8');
-        let output = csso.minify(cssFile, {
-            filename: css
-        });
-        fs.writeFileSync(target(css), Buffer.from(output.css, 'utf-8'));
+        const cssFile = fs.readFileSync(asset(css), 'utf8');
+        const output = csso.minify(cssFile);
+        fs.writeFileSync(target(css), output.css);
     } catch(e) {
         console.log(e);
     }
@@ -38,7 +36,7 @@ function minifyAndMoveJS(js) {
     const jsFile = fs.readFileSync(asset(js), 'utf8');
     terser.minify(jsFile)
     .then(minifiedJS => {
-        fs.writeFileSync(target(js), Buffer.from(minifiedJS.code, 'utf-8'));
+        fs.writeFileSync(target(js), minifiedJS.code, 'utf-8');
     })
     .catch(error => {
         console.log(error);
